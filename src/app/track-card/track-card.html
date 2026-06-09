@@ -1,5 +1,5 @@
 <article class="card" [class.active]="active()" (click)="select.emit(track())">
-  <img [src]="track().coverUrl" [alt]="track().title" />
+  <img [src]="track().coverUrl || 'https://picsum.photos/seed/' + track().id + '/300'" [alt]="track().title" />
   <h3>{{ track().title }}</h3>
   <p>{{ track().artist }}</p>
 

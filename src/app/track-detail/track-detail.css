@@ -1,0 +1,50 @@
+.detail {
+  display: flex;
+  gap: 1.25rem;
+  padding: 1.25rem;
+  border: 1px solid #e2e2e2;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.detail img {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.info h2 {
+  margin: 0;
+}
+
+.artist {
+  margin: 0.25rem 0 1rem;
+  color: #666;
+}
+
+dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.25rem 1rem;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+dl > div {
+  display: contents;
+}
+
+dt {
+  font-weight: 600;
+  color: #555;
+}
+
+dd {
+  margin: 0;
+}
+
+.loading {
+  color: #888;
+  font-style: italic;
+}

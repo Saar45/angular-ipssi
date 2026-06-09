@@ -1,0 +1,27 @@
+<form class="login-form" (submit)="$event.preventDefault(); onSubmit()">
+  <h2>Connexion</h2>
+
+  <label>
+    Email
+    <input type="email" [formField]="f.email" autocomplete="username" />
+    @if (f.email().touched() && f.email().errors().length) {
+      <small class="error">{{ f.email().errors()[0].message }}</small>
+    }
+  </label>
+
+  <label>
+    Mot de passe
+    <input type="password" [formField]="f.password" autocomplete="current-password" />
+    @if (f.password().touched() && f.password().errors().length) {
+      <small class="error">{{ f.password().errors()[0].message }}</small>
+    }
+  </label>
+
+  @if (error()) {
+    <p class="error">{{ error() }}</p>
+  }
+
+  <button type="submit" [disabled]="!f().valid() || loading()">
+    {{ loading() ? 'Connexion…' : 'Se connecter' }}
+  </button>
+</form>

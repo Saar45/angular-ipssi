@@ -1,5 +1,22 @@
 <main class="app">
-  <h1>CinéTrack 🎵</h1>
+  <header class="header">
+    <h1>CinéTrack 🎵</h1>
+    @if (auth.isLoggedIn()) {
+      <div class="user">
+        <span>👤 {{ auth.user()?.name ?? 'Connecté' }}</span>
+        <button class="ghost" (click)="auth.logout()">Déconnexion</button>
+      </div>
+    }
+  </header>
+
+  @if (!auth.isLoggedIn()) {
+    <app-login-form />
+  } @else {
+    <app-track-form
+      [editTrack]="selectedTrack()"
+      (save)="onSave($event)"
+      (cancel)="onCancelEdit()" />
+  }
 
   <input
     class="search"
@@ -8,15 +25,19 @@
     [value]="query()"
     (input)="query.set($any($event.target).value)" />
 
-  <app-track-form
-    [editTrack]="selectedTrack()"
-    (save)="onSave($event)"
-    (cancel)="onCancelEdit()" />
+  @if (selectedTrack(); as sel) {
+    <section class="detail-block">
+      <app-track-detail [trackId]="sel.id" />
+      @if (auth.isLoggedIn()) {
+        <button class="danger" (click)="onDelete()">Supprimer ce morceau</button>
+      }
+    </section>
+  }
 
-  <p class="count">{{ filteredTracks().length }} morceau(x)</p>
+  <p class="count">{{ tracks().length }} morceau(x)</p>
 
   <app-track-list
-    [tracks]="filteredTracks()"
+    [tracks]="tracks()"
     [selectedId]="selectedId()"
     (select)="onSelect($event)" />
 </main>

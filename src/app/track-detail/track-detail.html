@@ -1,0 +1,19 @@
+@if (track(); as t) {
+  <article class="detail">
+    <img [src]="t.coverUrl || 'https://picsum.photos/seed/' + t.id + '/300'" [alt]="t.title" />
+    <div class="info">
+      <h2>{{ t.title }}</h2>
+      <p class="artist">{{ t.artist }}</p>
+      <dl>
+        <div><dt>Album</dt><dd>{{ t.album }}</dd></div>
+        <div><dt>Genre</dt><dd>{{ t.genre }}</dd></div>
+        <div><dt>Année</dt><dd>{{ t.year }}</dd></div>
+        <div><dt>Durée</dt><dd>{{ t.durationSeconds | duration }}</dd></div>
+        <div><dt>Note</dt><dd>★ {{ t.rating }}/10</dd></div>
+        <div><dt>Favori</dt><dd>{{ t.favorite ? 'Oui' : 'Non' }}</dd></div>
+      </dl>
+    </div>
+  </article>
+} @else {
+  <p class="loading">Chargement de la fiche…</p>
+}

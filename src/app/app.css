@@ -8,8 +8,22 @@
     sans-serif;
 }
 
-.app h1 {
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   margin-bottom: 1.5rem;
+}
+
+.header h1 {
+  margin: 0;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.9rem;
 }
 
 .search {
@@ -27,7 +41,36 @@
   font-size: 0.85rem;
 }
 
-app-track-form {
+app-track-form,
+app-login-form {
   display: block;
   margin-bottom: 1.5rem;
+}
+
+.detail-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 8px;
+  background: #6c5ce7;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button.ghost {
+  background: transparent;
+  color: #6c5ce7;
+  border: 1px solid #6c5ce7;
+}
+
+button.danger {
+  align-self: flex-start;
+  background: #e74c3c;
 }
