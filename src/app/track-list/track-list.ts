@@ -1,4 +1,4 @@
-import { Component, input, signal } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { TrackCard } from '../track-card/track-card';
 import { Track } from '../models/track';
 
@@ -10,5 +10,6 @@ import { Track } from '../models/track';
 })
 export class TrackList {
   tracks = input.required<Track[]>();
-  protected selectedId = signal<number | null>(null);
+  selectedId = input<number | null>(null);
+  select = output<Track>();
 }

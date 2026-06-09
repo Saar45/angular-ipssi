@@ -41,6 +41,29 @@
   font-size: 0.875rem;
 }
 
+.meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+}
+
+.duration {
+  color: #555;
+}
+
+.rating {
+  padding: 0.1rem 0.45rem;
+  border-radius: 999px;
+  color: #fff;
+  font-weight: 600;
+}
+
+.tier {
+  font-size: 0.8rem;
+  color: #444;
+}
+
 .badge {
   align-self: flex-start;
   padding: 0.2rem 0.5rem;

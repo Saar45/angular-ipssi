@@ -2,6 +2,26 @@
   <img [src]="track().coverUrl" [alt]="track().title" />
   <h3>{{ track().title }}</h3>
   <p>{{ track().artist }}</p>
+
+  <div class="meta">
+    <span class="duration">⏱ {{ track().durationSeconds | duration }}</span>
+    <span class="rating" [appRatingColor]="track().rating">★ {{ track().rating }}/10</span>
+  </div>
+
+  <span class="tier">
+    @switch (tier()) {
+      @case ('top') {
+        🏆 Incontournable
+      }
+      @case ('good') {
+        👍 Recommandé
+      }
+      @default {
+        🎧 À écouter
+      }
+    }
+  </span>
+
   @if (active()) {
     <span class="badge">▶ En lecture</span>
   }

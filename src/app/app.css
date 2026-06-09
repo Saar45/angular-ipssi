@@ -11,3 +11,23 @@
 .app h1 {
   margin-bottom: 1.5rem;
 }
+
+.search {
+  width: 100%;
+  padding: 0.65rem 0.85rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font: inherit;
+}
+
+.count {
+  margin: 1.5rem 0 0.75rem;
+  color: #777;
+  font-size: 0.85rem;
+}
+
+app-track-form {
+  display: block;
+  margin-bottom: 1.5rem;
+}

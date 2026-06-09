@@ -10,6 +10,12 @@ Bibliothèque musicale — projet fil rouge de la formation Angular 22 & API RES
 
 L'état (tableau de `Track`) est détenu par le composant racine `App` et passé en `input()`.
 
+## J2 — Rendre l'application vivante
+
+- **F4** — Recherche en direct : `signal` (`query`) + `computed` (`filteredTracks`).
+- **F5** — Durée formatée & badge : pipe `duration` (`m:ss`), directive `appRatingColor` et `@switch` (palier de qualité).
+- **F6** — Ajouter / éditer : **Signal Forms** (`form`, `required`, `min`, `max`, `minLength`, `[formField]`) avec `linkedSignal` pour basculer ajout/édition.
+
 ## Démarrer
 
 ```bash

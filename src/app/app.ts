@@ -1,10 +1,11 @@
-import { Component, signal } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { TrackList } from './track-list/track-list';
+import { TrackForm, TrackFormValue } from './track-form/track-form';
 import { Track } from './models/track';
 
 @Component({
   selector: 'app-root',
-  imports: [TrackList],
+  imports: [TrackList, TrackForm],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
@@ -107,4 +108,50 @@ export class App {
       coverUrl: 'https://picsum.photos/seed/8/300',
     },
   ]);
+
+  // F4 — recherche en direct (signal + computed)
+  protected readonly query = signal('');
+  protected readonly filteredTracks = computed(() => {
+    const term = this.query().trim().toLowerCase();
+    if (!term) return this.tracks();
+    return this.tracks().filter(
+      (track) =>
+        track.title.toLowerCase().includes(term) ||
+        track.artist.toLowerCase().includes(term) ||
+        track.album.toLowerCase().includes(term),
+    );
+  });
+
+  // Sélection / édition
+  protected readonly selectedId = signal<number | null>(null);
+  protected readonly selectedTrack = computed(
+    () => this.tracks().find((track) => track.id === this.selectedId()) ?? null,
+  );
+
+  protected onSelect(track: Track): void {
+    this.selectedId.update((current) => (current === track.id ? null : track.id));
+  }
+
+  // F6 — ajout / édition via Signal Forms
+  protected onSave(value: TrackFormValue): void {
+    const editingId = this.selectedId();
+    if (editingId !== null) {
+      this.tracks.update((tracks) =>
+        tracks.map((track) => (track.id === editingId ? { ...track, ...value } : track)),
+      );
+      this.selectedId.set(null);
+      return;
+    }
+    const nextId = Math.max(0, ...this.tracks().map((track) => track.id)) + 1;
+    const newTrack: Track = {
+      ...value,
+      id: nextId,
+      coverUrl: `https://picsum.photos/seed/${nextId}/300`,
+    };
+    this.tracks.update((tracks) => [...tracks, newTrack]);
+  }
+
+  protected onCancelEdit(): void {
+    this.selectedId.set(null);
+  }
 }

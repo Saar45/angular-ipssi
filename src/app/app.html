@@ -1,4 +1,22 @@
 <main class="app">
   <h1>CinéTrack 🎵</h1>
-  <app-track-list [tracks]="tracks()" />
+
+  <input
+    class="search"
+    type="search"
+    placeholder="Rechercher un titre, un artiste, un album…"
+    [value]="query()"
+    (input)="query.set($any($event.target).value)" />
+
+  <app-track-form
+    [editTrack]="selectedTrack()"
+    (save)="onSave($event)"
+    (cancel)="onCancelEdit()" />
+
+  <p class="count">{{ filteredTracks().length }} morceau(x)</p>
+
+  <app-track-list
+    [tracks]="filteredTracks()"
+    [selectedId]="selectedId()"
+    (select)="onSelect($event)" />
 </main>

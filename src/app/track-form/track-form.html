@@ -1,0 +1,69 @@
+<form class="track-form" (submit)="$event.preventDefault(); onSubmit()">
+  <h2>{{ editing() ? 'Éditer le morceau' : 'Ajouter un morceau' }}</h2>
+
+  <label>
+    Titre
+    <input type="text" [formField]="f.title" />
+    @if (f.title().touched() && f.title().errors().length) {
+      <small class="error">{{ f.title().errors()[0].message }}</small>
+    }
+  </label>
+
+  <label>
+    Artiste
+    <input type="text" [formField]="f.artist" />
+    @if (f.artist().touched() && f.artist().errors().length) {
+      <small class="error">{{ f.artist().errors()[0].message }}</small>
+    }
+  </label>
+
+  <label>
+    Album
+    <input type="text" [formField]="f.album" />
+  </label>
+
+  <label>
+    Genre
+    <input type="text" [formField]="f.genre" />
+  </label>
+
+  <div class="row">
+    <label>
+      Durée (s)
+      <input type="number" [formField]="f.durationSeconds" />
+      @if (f.durationSeconds().touched() && f.durationSeconds().errors().length) {
+        <small class="error">{{ f.durationSeconds().errors()[0].message }}</small>
+      }
+    </label>
+
+    <label>
+      Année
+      <input type="number" [formField]="f.year" />
+      @if (f.year().touched() && f.year().errors().length) {
+        <small class="error">{{ f.year().errors()[0].message }}</small>
+      }
+    </label>
+
+    <label>
+      Note (0-10)
+      <input type="number" [formField]="f.rating" />
+      @if (f.rating().touched() && f.rating().errors().length) {
+        <small class="error">{{ f.rating().errors()[0].message }}</small>
+      }
+    </label>
+  </div>
+
+  <label class="checkbox">
+    <input type="checkbox" [formField]="f.favorite" />
+    Favori
+  </label>
+
+  <div class="actions">
+    <button type="submit" [disabled]="!f().valid()">
+      {{ editing() ? 'Enregistrer' : 'Ajouter' }}
+    </button>
+    @if (editing()) {
+      <button type="button" class="ghost" (click)="cancel.emit()">Annuler</button>
+    }
+  </div>
+</form>
