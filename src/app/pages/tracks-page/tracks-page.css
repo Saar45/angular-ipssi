@@ -1,0 +1,14 @@
+.search {
+  width: 100%;
+  padding: 0.65rem 0.85rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font: inherit;
+}
+
+.count {
+  margin: 0 0 0.75rem;
+  color: #777;
+  font-size: 0.85rem;
+}

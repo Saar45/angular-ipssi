@@ -1,7 +1,4 @@
-.app {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 2rem 1rem;
+.shell {
   font-family:
     system-ui,
     -apple-system,
@@ -12,50 +9,70 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1.5rem;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #eee;
 }
 
-.header h1 {
-  margin: 0;
+.brand {
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: #6c5ce7;
 }
 
-.user {
+.nav {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 1rem;
   font-size: 0.9rem;
 }
 
-.search {
-  width: 100%;
-  padding: 0.65rem 0.85rem;
-  margin-bottom: 1.5rem;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  font: inherit;
+.nav a {
+  text-decoration: none;
+  color: #444;
 }
 
-.count {
-  margin: 1.5rem 0 0.75rem;
-  color: #777;
-  font-size: 0.85rem;
+.nav a.active {
+  color: #6c5ce7;
+  font-weight: 600;
 }
 
-app-track-form,
-app-login-form {
-  display: block;
-  margin-bottom: 1.5rem;
+.user {
+  color: #666;
 }
 
-.detail-block {
+.content {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.notification {
   display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  margin-bottom: 1.5rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 960px;
+  margin: 1rem auto 0;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+}
+
+.notification.error {
+  background: #fdecea;
+  color: #b3261e;
+  border: 1px solid #f5c6c2;
+}
+
+.notification.success {
+  background: #e7f6ec;
+  color: #1e7e44;
+  border: 1px solid #bfe6cd;
 }
 
 button {
-  padding: 0.5rem 1rem;
+  padding: 0.45rem 0.9rem;
   border: none;
   border-radius: 8px;
   background: #6c5ce7;
@@ -70,7 +87,8 @@ button.ghost {
   border: 1px solid #6c5ce7;
 }
 
-button.danger {
-  align-self: flex-start;
-  background: #e74c3c;
+button.close {
+  background: transparent;
+  color: inherit;
+  padding: 0 0.25rem;
 }

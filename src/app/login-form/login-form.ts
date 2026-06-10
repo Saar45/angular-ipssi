@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, output, signal } from '@angular/core';
 import { form, required, email as emailValidator, FormField } from '@angular/forms/signals';
 import { AuthService } from '../services/auth';
 
@@ -10,6 +10,8 @@ import { AuthService } from '../services/auth';
 })
 export class LoginForm {
   private readonly auth = inject(AuthService);
+
+  loggedIn = output<void>();
 
   protected readonly model = signal({ email: 'demo@ipssi.fr', password: 'password123' });
   protected readonly f = form(this.model, (path) => {
@@ -27,7 +29,10 @@ export class LoginForm {
     this.loading.set(true);
     this.error.set(null);
     this.auth.login(email, password).subscribe({
-      next: () => this.loading.set(false),
+      next: () => {
+        this.loading.set(false);
+        this.loggedIn.emit();
+      },
       error: () => {
         this.loading.set(false);
         this.error.set('Identifiants invalides.');

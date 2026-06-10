@@ -1,43 +1,26 @@
-<main class="app">
+<div class="shell">
   <header class="header">
-    <h1>CinéTrack 🎵</h1>
-    @if (auth.isLoggedIn()) {
-      <div class="user">
-        <span>👤 {{ auth.user()?.name ?? 'Connecté' }}</span>
-        <button class="ghost" (click)="auth.logout()">Déconnexion</button>
-      </div>
-    }
+    <a class="brand" routerLink="/tracks">CinéTrack 🎵</a>
+    <nav class="nav">
+      <a routerLink="/tracks" routerLinkActive="active">Morceaux</a>
+      @if (auth.isLoggedIn()) {
+        <a routerLink="/tracks/new" routerLinkActive="active">Ajouter</a>
+        <span class="user">👤 {{ auth.user()?.name ?? 'Connecté' }}</span>
+        <button class="ghost" (click)="logout()">Déconnexion</button>
+      } @else {
+        <a routerLink="/login" routerLinkActive="active">Connexion</a>
+      }
+    </nav>
   </header>
 
-  @if (!auth.isLoggedIn()) {
-    <app-login-form />
-  } @else {
-    <app-track-form
-      [editTrack]="selectedTrack()"
-      (save)="onSave($event)"
-      (cancel)="onCancelEdit()" />
+  @if (notifications.current(); as note) {
+    <div class="notification" [class.error]="note.type === 'error'" [class.success]="note.type === 'success'">
+      <span>{{ note.message }}</span>
+      <button class="close" (click)="notifications.clear()">✕</button>
+    </div>
   }
 
-  <input
-    class="search"
-    type="search"
-    placeholder="Rechercher un titre, un artiste, un album…"
-    [value]="query()"
-    (input)="query.set($any($event.target).value)" />
-
-  @if (selectedTrack(); as sel) {
-    <section class="detail-block">
-      <app-track-detail [trackId]="sel.id" />
-      @if (auth.isLoggedIn()) {
-        <button class="danger" (click)="onDelete()">Supprimer ce morceau</button>
-      }
-    </section>
-  }
-
-  <p class="count">{{ tracks().length }} morceau(x)</p>
-
-  <app-track-list
-    [tracks]="tracks()"
-    [selectedId]="selectedId()"
-    (select)="onSelect($event)" />
-</main>
+  <main class="content">
+    <router-outlet />
+  </main>
+</div>

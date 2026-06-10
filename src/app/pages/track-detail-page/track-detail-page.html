@@ -1,0 +1,10 @@
+<a class="back" routerLink="/tracks">← Retour</a>
+
+<app-track-detail [trackId]="trackId()" />
+
+@if (auth.isLoggedIn()) {
+  <div class="actions">
+    <a class="btn" [routerLink]="['/tracks', trackId(), 'edit']">Éditer</a>
+    <button class="danger" (click)="onDelete()">Supprimer</button>
+  </div>
+}

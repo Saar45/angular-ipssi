@@ -38,6 +38,29 @@ npm install && npm start          # http://localhost:3000
 npm install && ng serve           # http://localhost:4200
 ```
 
+## J4 — Naviguer, sécuriser, livrer
+
+- **F11** — CRUD authentifié : création/édition/suppression via `TrackService` (POST/PUT/DELETE), réservées aux routes protégées.
+- **F12** — Routing + guard : `provideRouter` (lazy `loadComponent`, `withComponentInputBinding`), pages dans `src/app/pages/`, **`authGuard`** (`CanActivateFn`) qui protège `tracks/new` et `tracks/:id/edit` et redirige vers `/login?returnUrl=…`.
+- **F13** — Erreurs & livrer : **`errorInterceptor`** (gère 0/401/403/404, déconnecte sur 401, alimente un bandeau via `NotificationService`) + build de production (`ng build`).
+
+### Routes
+
+| Route | Page | Accès |
+|-------|------|-------|
+| `/tracks` | liste + recherche | public |
+| `/tracks/:id` | fiche détail | public |
+| `/tracks/new` | ajout | 🔒 connecté |
+| `/tracks/:id/edit` | édition | 🔒 connecté |
+| `/login` | connexion | public |
+| `**` | 404 | public |
+
+### Build de production
+
+```bash
+ng build        # sortie dans dist/cinetrack
+```
+
 ## Démarrer
 
 ```bash
