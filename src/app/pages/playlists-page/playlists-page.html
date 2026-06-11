@@ -1,0 +1,28 @@
+<div class="head">
+  <h1>Mes playlists</h1>
+  <a class="btn" routerLink="/playlists/new">+ Nouvelle playlist</a>
+</div>
+
+<input
+  class="search"
+  type="search"
+  placeholder="Rechercher une playlist…"
+  [value]="query()"
+  (input)="query.set($any($event.target).value)" />
+
+<ul class="list">
+  @for (playlist of filtered(); track playlist.id) {
+    <li class="row">
+      <a class="info" [routerLink]="['/playlists', playlist.id]">
+        <strong>{{ playlist.name }}</strong>
+        <span class="muted">{{ playlist.trackIds.length }} morceau(x)</span>
+      </a>
+      <div class="row-actions">
+        <a class="btn ghost" [routerLink]="['/playlists', playlist.id, 'edit']">Éditer</a>
+        <button class="danger" (click)="onDelete(playlist)">Supprimer</button>
+      </div>
+    </li>
+  } @empty {
+    <li class="empty">Aucune playlist. Crée la première !</li>
+  }
+</ul>

@@ -1,0 +1,38 @@
+<form class="playlist-form" (submit)="$event.preventDefault(); onSubmit()">
+  <h2>{{ editing() ? 'Éditer la playlist' : 'Nouvelle playlist' }}</h2>
+
+  <label>
+    Nom
+    <input type="text" [formField]="f.name" />
+    @if (f.name().touched() && f.name().errors().length) {
+      <small class="error">{{ f.name().errors()[0].message }}</small>
+    }
+  </label>
+
+  <fieldset class="tracks">
+    <legend>Morceaux ({{ model().trackIds.length }} sélectionné(s))</legend>
+    @if (f.trackIds().errors().length) {
+      <small class="error">{{ f.trackIds().errors()[0].message }}</small>
+    }
+    <div class="track-options">
+      @for (track of availableTracks(); track track.id) {
+        <label class="track-option" [class.selected]="isSelected(track.id)">
+          <input
+            type="checkbox"
+            [checked]="isSelected(track.id)"
+            (change)="toggleTrack(track.id)" />
+          <span>{{ track.title }} — {{ track.artist }}</span>
+        </label>
+      } @empty {
+        <p class="muted">Aucun morceau disponible.</p>
+      }
+    </div>
+  </fieldset>
+
+  <div class="actions">
+    <button type="submit" [disabled]="!f().valid()">
+      {{ editing() ? 'Enregistrer' : 'Créer' }}
+    </button>
+    <button type="button" class="ghost" (click)="cancel.emit()">Annuler</button>
+  </div>
+</form>

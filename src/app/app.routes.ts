@@ -25,6 +25,32 @@ export const routes: Routes = [
       import('./pages/track-detail-page/track-detail-page').then((m) => m.TrackDetailPage),
   },
   {
+    path: 'playlists',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./pages/playlists-page/playlists-page').then((m) => m.PlaylistsPage),
+  },
+  {
+    path: 'playlists/new',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./pages/playlist-form-page/playlist-form-page').then((m) => m.PlaylistFormPage),
+  },
+  {
+    path: 'playlists/:id/edit',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./pages/playlist-form-page/playlist-form-page').then((m) => m.PlaylistFormPage),
+  },
+  {
+    path: 'playlists/:id',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./pages/playlist-detail-page/playlist-detail-page').then(
+        (m) => m.PlaylistDetailPage,
+      ),
+  },
+  {
     path: 'login',
     loadComponent: () => import('./pages/login-page/login-page').then((m) => m.LoginPage),
   },

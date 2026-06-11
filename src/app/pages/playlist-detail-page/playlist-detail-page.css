@@ -1,0 +1,33 @@
+.back {
+  display: inline-block;
+  margin-bottom: 1rem;
+  color: #6c5ce7;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.head h1 {
+  margin: 0;
+}
+
+.muted {
+  color: #888;
+  font-size: 0.85rem;
+  margin: 0.25rem 0 1rem;
+}
+
+.btn {
+  padding: 0.45rem 0.85rem;
+  border-radius: 8px;
+  background: #6c5ce7;
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 0.85rem;
+}

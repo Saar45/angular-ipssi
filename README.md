@@ -61,6 +61,16 @@ npm install && ng serve           # http://localhost:4200
 ng build        # sortie dans dist/cinetrack
 ```
 
+## Évaluation — Fonctionnalité « Playlists »
+
+Fonctionnalité complète couvrant tous les critères (CRUD + API, recherche, formulaire validé, route protégée, réactivité, sécurité, gestion d'erreurs).
+
+- **Service** `PlaylistService` : `GET/POST/PUT/DELETE /playlists` (détail dérivé de la liste, pas de `GET /:id` côté API).
+- **Affichage + recherche** : `PlaylistsPage` (liste réactive `toSignal`, recherche par nom en `computed`, suppression avec rechargement).
+- **Fiche détail** : `PlaylistDetailPage` résout les `trackIds` en `Track[]` (`combineLatest` playlist + morceaux).
+- **Formulaire validé** : `PlaylistForm` (**Signal Forms**) — nom `required`/`minLength`, sélecteur de morceaux avec `minLength(trackIds, 1)`.
+- **Routes protégées** (`authGuard`) : `/playlists`, `/playlists/new`, `/playlists/:id`, `/playlists/:id/edit`.
+
 ## Démarrer
 
 ```bash

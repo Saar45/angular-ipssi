@@ -4,6 +4,7 @@
     <nav class="nav">
       <a routerLink="/tracks" routerLinkActive="active">Morceaux</a>
       @if (auth.isLoggedIn()) {
+        <a routerLink="/playlists" routerLinkActive="active">Playlists</a>
         <a routerLink="/tracks/new" routerLinkActive="active">Ajouter</a>
         <span class="user">👤 {{ auth.user()?.name ?? 'Connecté' }}</span>
         <button class="ghost" (click)="logout()">Déconnexion</button>

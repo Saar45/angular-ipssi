@@ -1,0 +1,7 @@
+<a class="back" (click)="onCancel()">← Mes playlists</a>
+
+<app-playlist-form
+  [editPlaylist]="editPlaylist()"
+  [availableTracks]="availableTracks()"
+  (save)="onSave($event)"
+  (cancel)="onCancel()" />

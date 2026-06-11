@@ -1,0 +1,12 @@
+<a class="back" routerLink="/playlists">← Mes playlists</a>
+
+@if (playlist(); as p) {
+  <div class="head">
+    <h1>{{ p.name }}</h1>
+    <a class="btn" [routerLink]="['/playlists', p.id, 'edit']">Éditer</a>
+  </div>
+  <p class="muted">{{ tracks().length }} morceau(x)</p>
+  <app-track-list [tracks]="tracks()" (select)="openTrack($event)" />
+} @else {
+  <p class="muted">Chargement de la playlist…</p>
+}
