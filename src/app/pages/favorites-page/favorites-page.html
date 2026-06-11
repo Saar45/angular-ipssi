@@ -1,16 +1,16 @@
-<h1>Morceaux</h1>
+<h1>Mes favoris ❤️</h1>
 
 <input
   class="search"
   type="search"
-  placeholder="Rechercher un titre, un artiste, un album…"
+  placeholder="Rechercher dans les favoris…"
   [value]="query()"
   (input)="query.set($any($event.target).value)" />
 
-<p class="count">{{ tracks().length }} morceau(x)</p>
+<p class="count">{{ tracks().length }} favori(s)</p>
 
 <app-track-list
   [tracks]="tracks()"
-  [canFavorite]="auth.isLoggedIn()"
+  [canFavorite]="true"
   (select)="openDetail($event)"
   (favoriteToggle)="onToggleFavorite($event)" />

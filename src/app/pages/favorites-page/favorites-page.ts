@@ -4,30 +4,27 @@ import { Router } from '@angular/router';
 import { combineLatest, debounceTime, distinctUntilChanged, startWith, switchMap } from 'rxjs';
 import { TrackList } from '../../track-list/track-list';
 import { TrackService } from '../../services/track';
-import { AuthService } from '../../services/auth';
 import { Track } from '../../models/track';
 
 @Component({
-  selector: 'app-tracks-page',
+  selector: 'app-favorites-page',
   imports: [TrackList],
-  templateUrl: './tracks-page.html',
-  styleUrl: './tracks-page.css',
+  templateUrl: './favorites-page.html',
+  styleUrl: './favorites-page.css',
 })
-export class TracksPage {
+export class FavoritesPage {
   private readonly trackService = inject(TrackService);
-  protected readonly auth = inject(AuthService);
   private readonly router = inject(Router);
 
-  // F9 — recherche serveur réactive (debounce + switchMap).
   protected readonly query = signal('');
   private readonly reload = signal(0);
 
-  // F7 — liste chargée depuis l'API ; se relance à chaque recherche ou bascule de favori.
+  // Favoris filtrés côté serveur (?favorite=true) + recherche, rechargés après bascule.
   protected readonly tracks = toSignal(
     combineLatest([
       toObservable(this.query).pipe(debounceTime(300), startWith(''), distinctUntilChanged()),
       toObservable(this.reload),
-    ]).pipe(switchMap(([term]) => this.trackService.getTracks(term))),
+    ]).pipe(switchMap(([term]) => this.trackService.getFavorites(term))),
     { initialValue: [] as Track[] },
   );
 

@@ -25,6 +25,12 @@ export const routes: Routes = [
       import('./pages/track-detail-page/track-detail-page').then((m) => m.TrackDetailPage),
   },
   {
+    path: 'favorites',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./pages/favorites-page/favorites-page').then((m) => m.FavoritesPage),
+  },
+  {
     path: 'playlists',
     canActivate: [authGuard],
     loadComponent: () =>

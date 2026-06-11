@@ -16,6 +16,20 @@ export class TrackService {
     return this.http.get<Track[]>(this.baseUrl, { params });
   }
 
+  /** Favoris uniquement (filtre serveur ?favorite=true), avec recherche optionnelle. */
+  getFavorites(query = ''): Observable<Track[]> {
+    let params = new HttpParams().set('favorite', 'true');
+    if (query.trim()) {
+      params = params.set('q', query.trim());
+    }
+    return this.http.get<Track[]>(this.baseUrl, { params });
+  }
+
+  /** Bascule le favori d'un morceau (mise à jour partielle PATCH). */
+  setFavorite(id: number, favorite: boolean): Observable<Track> {
+    return this.http.patch<Track>(`${this.baseUrl}/${id}`, { favorite });
+  }
+
   /** F8 — détail d'un morceau. */
   getTrack(id: number): Observable<Track> {
     return this.http.get<Track>(`${this.baseUrl}/${id}`);

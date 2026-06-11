@@ -14,7 +14,9 @@ type RatingTier = 'top' | 'good' | 'average';
 export class TrackCard {
   track = input.required<Track>();
   active = input(false);
+  canFavorite = input(false);
   select = output<Track>();
+  favoriteToggle = output<Track>();
 
   protected readonly tier = computed<RatingTier>(() => {
     const rating = this.track().rating;

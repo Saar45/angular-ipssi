@@ -3,7 +3,9 @@
     <app-track-card
       [track]="track"
       [active]="track.id === selectedId()"
-      (select)="select.emit($event)" />
+      [canFavorite]="canFavorite()"
+      (select)="select.emit($event)"
+      (favoriteToggle)="favoriteToggle.emit($event)" />
   } @empty {
     <p class="empty">Aucun morceau à afficher.</p>
   }

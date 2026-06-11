@@ -71,6 +71,12 @@ Fonctionnalité complète couvrant tous les critères (CRUD + API, recherche, fo
 - **Formulaire validé** : `PlaylistForm` (**Signal Forms**) — nom `required`/`minLength`, sélecteur de morceaux avec `minLength(trackIds, 1)`.
 - **Routes protégées** (`authGuard`) : `/playlists`, `/playlists/new`, `/playlists/:id`, `/playlists/:id/edit`.
 
+## Fonctionnalité « Favoris »
+
+- **Toggle** : cœur ❤️/🤍 sur chaque carte (visible si connecté) → `PATCH /tracks/:id { favorite }` (mise à jour partielle), via `TrackService.setFavorite`.
+- **Affichage + recherche** : `FavoritesPage` (route `/favorites`, protégée) → `GET /tracks?favorite=true` (+ `?q=`), liste réactive `toSignal` rechargée après chaque bascule.
+- **Réactivité** : `TrackCard` émet `favoriteToggle`, relayé par `TrackList` jusqu'aux pages (`tracks-page`, `favorites-page`).
+
 ## Démarrer
 
 ```bash

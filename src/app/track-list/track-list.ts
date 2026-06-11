@@ -11,5 +11,7 @@ import { Track } from '../models/track';
 export class TrackList {
   tracks = input.required<Track[]>();
   selectedId = input<number | null>(null);
+  canFavorite = input(false);
   select = output<Track>();
+  favoriteToggle = output<Track>();
 }
